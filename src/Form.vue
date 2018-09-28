@@ -5,17 +5,19 @@
 </template>
 
 <script>
+  import { isType, isEvery } from './predicates';
+
   export default {
     props: {
       entries: {
         type: Array,
         required: true,
-        validator: (entries) => Array.isArray(entries) && entries.every((name) => typeof value === 'string')
+        validator: isEvery(isType('string'))
       },
       validators: {
         type: Array,
         default: () => [],
-        validator: (validators) => Array.isArray(validators) && validators.every((validator) => typeof validator === 'function')
+        validator: isEvery(isType('function'))
       }
     }
   };
