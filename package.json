@@ -1,0 +1,29 @@
+{
+  "name": "vue-form-container",
+  "version": "0.0.0",
+  "description": ".",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitorLuizC/vue-form-container.git"
+  },
+  "keywords": [
+    "form",
+    "form-component",
+    "validator",
+    "form-validator",
+    "vue",
+    "vue-component",
+    "vue-form",
+    "vue-form-component"
+  ],
+  "author": {
+    "name": "Vitor Luiz Cavalcanti",
+    "url": "https://vitorluizc.github.io/",
+    "email": "vitorluizc@outlook.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VitorLuizC/vue-form-container/issues"
+  },
+  "homepage": "https://github.com/VitorLuizC/vue-form-container#readme"
+}
