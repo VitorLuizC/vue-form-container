@@ -1,0 +1,13 @@
+# Node.js modules.
+node_modules
+
+# NPM's lockfile.
+# We're using Yarn and it provides it's own lockfile.
+npm-lockfile.json
+
+# Log files.
+*.log
+*.log.*
+
+# Distribution sources.
+dist/
