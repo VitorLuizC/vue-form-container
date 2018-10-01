@@ -9,6 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/VitorLuizC/vue-form-container.git"
   },
+  "files": [ "dist/" ],
   "cdn": "dist/vue-form-container.js",
   "main": "dist/vue-form-container.cjs.js",
   "unpkg": "dist/vue-form-container.js",
