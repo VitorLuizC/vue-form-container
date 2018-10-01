@@ -2,10 +2,19 @@
   "name": "vue-form-container",
   "version": "0.0.0",
   "description": ".",
+  "scripts": {
+    "build": "bili src/index.js --formats es,cjs,umd --plugins vue --banner --js buble --moduleName VueFormContainer"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VitorLuizC/vue-form-container.git"
   },
+  "cdn": "dist/vue-form-container.js",
+  "main": "dist/vue-form-container.cjs.js",
+  "unpkg": "dist/vue-form-container.js",
+  "module": "dist/vue-form-container.es.js",
+  "jsdelivr": "dist/vue-form-container.js",
+  "umd:main": "dist/vue-form-container.js",
   "keywords": [
     "form",
     "form-component",
@@ -27,7 +36,10 @@
   },
   "homepage": "https://github.com/VitorLuizC/vue-form-container#readme",
   "devDependencies": {
-    "vue": "^2.5.17"
+    "bili": "^3.1.2",
+    "rollup-plugin-vue": "^4.3.2",
+    "vue": "^2.5.17",
+    "vue-template-compiler": "^2.5.17"
   },
   "dependencies": {
     "valite": "^0.5.0"

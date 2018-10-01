@@ -1,4 +1,4 @@
-import FormContainer from './FormContainer';
+import FormContainer from './FormContainer.vue';
 
 /**
  * Globally register FormContainer and it's helpers on Vue application.
