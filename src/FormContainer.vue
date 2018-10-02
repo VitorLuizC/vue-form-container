@@ -76,7 +76,7 @@
       },
 
       isValid () {
-        return isValid(this.errors) && this.isLoading;
+        return !this.isLoading && isValid(this.errors);
       }
     },
 
