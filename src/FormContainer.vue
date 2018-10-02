@@ -1,7 +1,6 @@
 <template>
   <form>
     <slot
-      :values="values"
       :errors="errors"
       :fields="fields"
       :isValid="isValid"
@@ -14,7 +13,20 @@
 
 <script>
   import { isValid, validate, validateSchema } from 'valite';
+  import { defineReadOnlyProperty } from './object';
   import { isType, isEveryProperty, isNotEmptyString } from './predicates';
+
+  /**
+   * Model of global form accessor object.
+   * @typedef {Object} FormAcessor
+   * @property {Object.<string, *>} fields
+   * @property {Object.<string, string>} errors
+   * @property {function(string,*):void} update
+   * @property {boolean} isValid
+   * @property {boolean} isLoading
+   * @property {function():Promise.<void>} validateForm
+   * @property {function(string):Promise.<void>} validateField
+   */
 
   export default {
     props: {
@@ -77,7 +89,7 @@
       rename (to, from) {
         if (isNotEmptyString(from))
           this.$form.unregister(from);
-        this.$form.register(to, this);
+        this.$form.register(to, createFormAcessor());
       },
 
       /**
@@ -124,6 +136,25 @@
           this.ticks -= 1;
           console.error('Can\'t validate form.');
         }
+      },
+
+      /**
+       * Creates the form acessor object.
+       * @returns {FormAcessor}
+       */
+      createFormAcessor () {
+        const acessor = {
+          update: this.update.bind(this),
+          validateForm: this.validateForm.bind(this),
+          validateField: this.validateField.bind(this),
+        };
+
+        defineReadOnlyProperty(acessor, 'fields', () => this.fields);
+        defineReadOnlyProperty(acessor, 'errors', () => this.errors);
+        defineReadOnlyProperty(acessor, 'isValid', () => this.isValid);
+        defineReadOnlyProperty(acessor, 'isLoading', () => this.isLoading);
+
+        return acessor;
       }
     },
 
