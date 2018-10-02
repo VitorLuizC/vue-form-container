@@ -72,7 +72,7 @@
       },
 
       isLoading () {
-        this.ticks > 0;
+        return this.ticks > 0;
       },
 
       isValid () {
@@ -89,7 +89,7 @@
       rename (to, from) {
         if (isNotEmptyString(from))
           this.$form.unregister(from);
-        this.$form.register(to, createFormAcessor());
+        this.$form.register(to, this.createFormAcessor());
       },
 
       /**
