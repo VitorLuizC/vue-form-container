@@ -47,5 +47,5 @@ export const isEveryProperty = (predicate) => (value) => {
   if (!isObject(value))
     return false;
   const properties = Object.keys(value).map((key) => value[key]);
-  return isEvery(predicate)(properties);
+  return properties.every(isEvery(predicate));
 };
