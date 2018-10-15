@@ -43,6 +43,6 @@
     "vue-template-compiler": "^2.5.17"
   },
   "dependencies": {
-    "valite": "^0.5.0"
+    "valite": "^0.6.0"
   }
 }

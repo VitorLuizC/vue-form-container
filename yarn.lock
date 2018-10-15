@@ -1760,13 +1760,6 @@ is-plain-obj@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
   integrity sha1-caUMhCnfync8kqOQpKA7OfzVHT4=
 
-is-plain-object@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
-  integrity sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==
-  dependencies:
-    isobject "^3.0.1"
-
 is-posix-bracket@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/is-posix-bracket/-/is-posix-bracket-0.1.1.tgz#3334dc79774368e92f016e6fbc0a88f5cd6e6bc4"
@@ -3005,13 +2998,6 @@ sax@~1.2.1:
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.1.tgz#7dfdd8814bdb7cabc7be0fb1d734cfb66c940477"
   integrity sha512-PqpAxfrEhlSUWge8dwIp4tZnQ25DIOthpiaHNIthsjEFQD6EvqUKUDM7L8O2rShkFccYo1VjJR0coWfNkCubRw==
 
-set-value@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/set-value/-/set-value-3.0.0.tgz#bc021514f46effed8176fd5f0f67e9988531141f"
-  integrity sha512-tqkg9wJ2TOsxbzIMG5NMAmzjdbDTAD0in7XuUzmFpJE4Ipi2QFBfgC2Z1/gfxcAmWCPsuutiEJyDIMRsrjrMOQ==
-  dependencies:
-    is-plain-object "^2.0.4"
-
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
@@ -3266,13 +3252,12 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-valite@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/valite/-/valite-0.5.0.tgz#ff67bc0e906d734bfe99dea37a2cf10a1a768a1a"
-  integrity sha512-t/hwrPQhxGJbWtaAfTx+7aGAP6yTIyPMkCs8SijkjIx3XbTLVeC19ZphTOkGetV6Ajbe4/drt15Ye7loJwmI6w==
+valite@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/valite/-/valite-0.6.0.tgz#d7dc562c847ac3d5c3d9dd224e61ece40e2e3fbd"
+  integrity sha512-2tPGDtMZjzzzOU5vmBNHKjxWV++DK6NJB0wdZvSSdVQoiFA+9yO2kPA9haKW7WDKznXKYIsJDEe1PWw52aHndA==
   dependencies:
     get-value "^3.0.1"
-    set-value "^3.0.0"
 
 vendors@^1.0.0:
   version "1.0.2"

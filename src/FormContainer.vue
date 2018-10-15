@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import { isValid, validate, validateSchema } from 'valite';
+  import { isValid, validate, validateObject } from 'valite';
   import { defineReadOnlyProperty } from './object';
   import { isType, isEveryProperty, isNotEmptyString } from './predicates';
 
@@ -129,7 +129,7 @@
       async validateForm () {
         try {
           this.ticks += 1;
-          const errors = await validateSchema(this.values, this.model);
+          const errors = await validateObject(this.values, this.model);
           this.errors = errors;
           this.ticks -= 1;
         } catch (error) {
