@@ -35,7 +35,7 @@
         required: true,
         validator: isNotEmptyString
       },
-      model: {
+      schema: {
         type: Object,
         required: true,
         validator: isEveryProperty(isType('function'))
@@ -61,7 +61,7 @@
       fields () {
         const descriptors = {};
 
-        Object.keys(this.model).forEach((name) => {
+        Object.keys(this.schema).forEach((name) => {
           descriptors[name] = {
             get: () => this.values[name],
             set: (value) => this.update(name, value)
@@ -109,7 +109,7 @@
        */
       async validateField (field) {
         const value = this.values[field];
-        const validators = this.model[field];
+        const validators = this.schema[field];
 
         try {
           this.ticks += 1;
@@ -129,7 +129,7 @@
       async validateForm () {
         try {
           this.ticks += 1;
-          const errors = await validateObject(this.values, this.model);
+          const errors = await validateObject(this.values, this.schema);
           this.errors = errors;
           this.ticks -= 1;
         } catch (error) {
