@@ -64,7 +64,10 @@
         Object.keys(this.schema).forEach((name) => {
           descriptors[name] = {
             get: () => this.values[name],
-            set: (value) => this.update(name, value)
+            set: (value) => this.update(name, value),
+            writable: true,
+            enumerable: true,
+            configurable: false
           };
         });
 
