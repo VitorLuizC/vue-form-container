@@ -183,7 +183,7 @@
 
     mounted () {
       this.$form.register(this.name, this.createFormAcessor());
-      this.setupValuesWith(this.initial);
+      this.setupValuesWith(this.schema, this.initial);
     },
 
     beforeDestroy () {
