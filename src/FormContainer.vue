@@ -14,7 +14,7 @@
 <script>
   import { isValid, validate, validateObject } from 'valite';
   import { defineReadOnlyProperty } from './object';
-  import { isType, isEveryProperty, isNotEmptyString } from './predicates';
+  import { isType, isEveryProperty, isNotEmptyString, isObject } from './predicates';
 
   /**
    * Model of global form accessor object.
@@ -39,6 +39,11 @@
         type: Object,
         required: true,
         validator: isEveryProperty(isType('function'))
+      },
+      initial: {
+        type: Object,
+        default: () => Object.create(null),
+        validator: isObject
       }
     },
 
@@ -51,9 +56,22 @@
     },
 
     watch: {
-      name: {
-        handler: 'rename',
-        immediate: true,
+      /**
+       * When name is changed it swiches registered form name.
+       * @param {string} newName
+       * @param {string} [oldName]
+       */
+      name (newName, oldName) {
+        this.$form.unregister(from);
+        this.$form.register(newName, this.createFormAcessor());
+      },
+
+      /**
+       * When schema is changed it updates values with it.
+       * @param {object} schema
+       */
+      schema (schema) {
+        this.setupValuesWith(schema, this.values);
       }
     },
 
@@ -61,10 +79,10 @@
       fields () {
         const descriptors = {};
 
-        Object.keys(this.schema).forEach((name) => {
-          descriptors[name] = {
-            get: () => this.values[name],
-            set: (value) => this.update(name, value),
+        Object.keys(this.values).forEach((key) => {
+          descriptors[key] = {
+            get: () => this.values[key],
+            set: (value) => this.update(key, value),
             writable: true,
             enumerable: true,
             configurable: false
@@ -85,14 +103,16 @@
 
     methods: {
       /**
-       * When name is change it swiches registered form name.
-       * @param {string} to
-       * @param {string} [from]
+       * Setups state using an schema and value objects.
+       * @param {object} schema
+       * @param {object} values
        */
-      rename (to, from) {
-        if (isNotEmptyString(from))
-          this.$form.unregister(from);
-        this.$form.register(to, this.createFormAcessor());
+      setupValuesWith (schema, values) {
+        const keys = Object.keys(Object.assign({}, schema, values));
+        this.values = keys.reduce((state, key) => {
+          state[key] = values[key] || undefined;
+          return state;
+        }, Object.create(null));
       },
 
       /**
@@ -159,6 +179,11 @@
 
         return acessor;
       }
+    },
+
+    mounted () {
+      this.$form.register(this.name, this.createFormAcessor());
+      this.setupValuesWith(this.initial);
     },
 
     beforeDestroy () {
