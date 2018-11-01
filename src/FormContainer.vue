@@ -83,7 +83,6 @@
           descriptors[key] = {
             get: () => this.values[key],
             set: (value) => this.update(key, value),
-            writable: true,
             enumerable: true,
             configurable: false
           };
