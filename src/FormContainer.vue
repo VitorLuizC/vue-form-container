@@ -78,9 +78,9 @@
 
       context () {
         const context = {
-          update: this.update.bind(this),
-          validateForm: this.validateForm.bind(this),
-          validateField: this.validateField.bind(this),
+          update: this.update,
+          validateForm: this.validateForm,
+          validateField: this.validateField,
         };
 
         defineReadOnlyProperty(context, 'fields', () => this.fields);
