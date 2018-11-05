@@ -8,7 +8,6 @@ export const definePropertyAcessors = (object, key, { get, set }) => (
   Object.defineProperty(object, key, {
     get,
     set,
-    writable: false,
     enumerable: true,
     configurable: false
   })
