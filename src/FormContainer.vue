@@ -1,6 +1,6 @@
 <script>
   import { isValid, validate, validateObject } from 'valite';
-  import { defineReadOnlyProperty } from './object';
+  import { definePropertyAcessors, defineReadOnlyProperty } from './object';
   import { isType, isEveryProperty, isNotEmptyString, isObject } from './predicates';
 
   /**
@@ -64,18 +64,16 @@
 
     computed: {
       fields () {
-        const descriptors = {};
+        const fields = Object.create(null);
 
-        Object.keys(this.values).forEach((key) => {
-          descriptors[key] = {
-            get: () => this.values[key],
-            set: (value) => this.update(key, value),
-            enumerable: true,
-            configurable: false
-          };
-        });
+        Object.keys(this.values).forEach(
+          (field) => definePropertyAcessors(fields, field, {
+            get: () => this.values[field],
+            set: (value) => this.update(field, value)
+          })
+        );
 
-        return Object.create(null, descriptors);
+        return fields;
       },
 
       context () {

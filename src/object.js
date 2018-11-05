@@ -1,14 +1,28 @@
 /**
+ * Defines acessors (get and set) to key on object.
+ * @param {object} object
+ * @param {string} key
+ * @param {{ get: () => any, set: (value: any) => void }} acessors
+ */
+export const definePropertyAcessors = (object, key, { get, set }) => (
+  Object.defineProperty(object, key, {
+    get,
+    set,
+    writable: false,
+    enumerable: true,
+    configurable: false
+  })
+);
+
+/**
  * Defines a read-only property on target object.
  * @param {Object.<*, *>} target
  * @param {string} key
  * @param {function():any} get
  */
 export const defineReadOnlyProperty = (target, key, get) => (
-  Object.defineProperty(target, key, {
+  definePropertyAcessors(target, key, {
     get,
-    set: () => { throw new Error(`Cannot assign to readonly property "${key}".`); },
-    enumerable: true,
-    configurable: false
+    set: () => { throw new Error(`Cannot assign to readonly property "${key}".`); }
   })
 );
