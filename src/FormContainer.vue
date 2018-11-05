@@ -1,16 +1,3 @@
-<template>
-  <form>
-    <slot
-      :errors="errors"
-      :fields="fields"
-      :isValid="isValid"
-      :isLoading="isLoading"
-      :validateForm="validateForm"
-      :validateField="validateField"
-    />
-  </form>
-</template>
-
 <script>
   import { isValid, validate, validateObject } from 'valite';
   import { defineReadOnlyProperty } from './object';
@@ -63,7 +50,7 @@
        */
       name (newName, oldName) {
         this.$form.unregister(from);
-        this.$form.register(newName, this.createFormAcessor());
+        this.$form.register(newName, this.context);
       },
 
       /**
@@ -89,6 +76,21 @@
         });
 
         return Object.create(null, descriptors);
+      },
+
+      context () {
+        const context = {
+          update: this.update.bind(this),
+          validateForm: this.validateForm.bind(this),
+          validateField: this.validateField.bind(this),
+        };
+
+        defineReadOnlyProperty(context, 'fields', () => this.fields);
+        defineReadOnlyProperty(context, 'errors', () => this.errors);
+        defineReadOnlyProperty(context, 'isValid', () => this.isValid);
+        defineReadOnlyProperty(context, 'isLoading', () => this.isLoading);
+
+        return context;
       },
 
       isLoading () {
@@ -158,30 +160,15 @@
           this.ticks -= 1;
           console.error('Can\'t validate form.');
         }
-      },
-
-      /**
-       * Creates the form acessor object.
-       * @returns {FormAcessor}
-       */
-      createFormAcessor () {
-        const acessor = {
-          update: this.update.bind(this),
-          validateForm: this.validateForm.bind(this),
-          validateField: this.validateField.bind(this),
-        };
-
-        defineReadOnlyProperty(acessor, 'fields', () => this.fields);
-        defineReadOnlyProperty(acessor, 'errors', () => this.errors);
-        defineReadOnlyProperty(acessor, 'isValid', () => this.isValid);
-        defineReadOnlyProperty(acessor, 'isLoading', () => this.isLoading);
-
-        return acessor;
       }
     },
 
+    render () {
+      return this.$scopedSlots.default(this.context);
+    },
+
     mounted () {
-      this.$form.register(this.name, this.createFormAcessor());
+      this.$form.register(this.name, this.context);
       this.setupValuesWith(this.schema, this.initial);
     },
 
