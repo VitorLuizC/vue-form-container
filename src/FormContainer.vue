@@ -17,11 +17,6 @@
 
   export default {
     props: {
-      name: {
-        type: String,
-        required: true,
-        validator: isNotEmptyString
-      },
       schema: {
         type: Object,
         required: true,
@@ -43,16 +38,6 @@
     },
 
     watch: {
-      /**
-       * When name is changed it swiches registered form name.
-       * @param {string} newName
-       * @param {string} [oldName]
-       */
-      name (newName, oldName) {
-        this.$form.unregister(from);
-        this.$form.register(newName, this.context);
-      },
-
       /**
        * When schema is changed it updates values with it.
        * @param {object} schema
@@ -76,19 +61,19 @@
         return fields;
       },
 
-      context () {
-        const context = {
+      scope () {
+        const scope = {
           update: this.update,
           validateForm: this.validateForm,
           validateField: this.validateField,
         };
 
-        defineReadOnlyProperty(context, 'fields', () => this.fields);
-        defineReadOnlyProperty(context, 'errors', () => this.errors);
-        defineReadOnlyProperty(context, 'isValid', () => this.isValid);
-        defineReadOnlyProperty(context, 'isLoading', () => this.isLoading);
+        defineReadOnlyProperty(scope, 'fields', () => this.fields);
+        defineReadOnlyProperty(scope, 'errors', () => this.errors);
+        defineReadOnlyProperty(scope, 'isValid', () => this.isValid);
+        defineReadOnlyProperty(scope, 'isLoading', () => this.isLoading);
 
-        return context;
+        return scope;
       },
 
       isLoading () {
@@ -165,16 +150,11 @@
     },
 
     render () {
-      return this.$scopedSlots.default(this.context);
+      return this.$scopedSlots.default(this.scope);
     },
 
     mounted () {
-      this.$form.register(this.name, this.context);
       this.setupValuesWith(this.schema, this.initial);
-    },
-
-    beforeDestroy () {
-      this.$form.unregister(this.name);
     }
   };
 </script>

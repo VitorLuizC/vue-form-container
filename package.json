@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": ".",
   "scripts": {
-    "build": "bili src/index.js --formats es,cjs,umd --plugins vue --banner --js buble --moduleName VueFormContainer"
+    "build": "bili src/FormContainer.vue --formats es,cjs,umd --plugins vue --banner --js buble --moduleName VueFormContainer"
   },
   "repository": {
     "type": "git",
