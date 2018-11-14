@@ -129,35 +129,38 @@
        * @param {string} field Field's name.
        * @returns {Promise.<void>}
        */
-      async validateField (field) {
-        const value = this.values[field];
-        const validators = this.schema[field];
-
-        try {
-          this.ticks += 1;
-          const error = await validate(value, validators);
-          this.$set(this.errors, field, error);
-          this.ticks -= 1;
-        } catch (error) {
-          this.ticks -= 1;
-          console.error(`Can't validate field "${field}".`);
-        }
+      validateField (field) {
+        this.ticks += 1;
+        return (
+          validate(this.values[field], this.schema[field])
+            .then((error) => {
+              this.$set(this.errors, field, error);
+              this.ticks -= 1;
+            })
+            .catch((_) => {
+              console.error(`Can't validate field "${field}".`);
+              this.ticks -= 1;
+            })
+        );
       },
 
       /**
        * Validates all fields and updates Form properties.
        * @returns {Promise.<void>}
        */
-      async validateForm () {
-        try {
-          this.ticks += 1;
-          const errors = await validateObject(this.values, this.schema);
-          this.errors = errors;
-          this.ticks -= 1;
-        } catch (error) {
-          this.ticks -= 1;
-          console.error('Can\'t validate form.');
-        }
+      validateForm () {
+        this.ticks += 1;
+        return (
+          validateObject(this.values, this.schema)
+            .then((errors) => {
+              this.errors = errors;
+              this.ticks -= 1;
+            })
+            .catch((_) => {
+              console.error('Can\'t validate form.');
+              this.ticks -= 1;
+            })
+        );
       }
     },
 
