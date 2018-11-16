@@ -1,9 +1,9 @@
 {
   "name": "vue-form-container",
-  "version": "0.0.0",
-  "description": ".",
+  "version": "1.0.0",
+  "description": "A Provider Component that encapsulate your forms and handle their states and validations.",
   "scripts": {
-    "build": "bili src/FormContainer.vue --formats es,cjs,umd --plugins vue --banner --js buble --moduleName VueFormContainer"
+    "build": "NODE_ENV=production bili src/FormContainer.vue --formats es,cjs,umd --plugins vue --banner --js buble --moduleName VueFormContainer"
   },
   "repository": {
     "type": "git",
