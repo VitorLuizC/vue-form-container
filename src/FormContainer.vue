@@ -42,8 +42,12 @@
        * When schema is changed it updates values with it.
        * @param {object} schema
        */
-      schema (schema) {
-        this.setupValuesWith(schema, this.values);
+      schema: {
+        immediate: true,
+        handler (schema = this.schema) {
+          const values = this.values || this.initial;
+          this.setupValuesWith(schema, values);
+        }
       }
     },
 
@@ -151,10 +155,6 @@
 
     render () {
       return this.$scopedSlots.default(this.scope);
-    },
-
-    mounted () {
-      this.setupValuesWith(this.schema, this.initial);
     }
   };
 </script>
