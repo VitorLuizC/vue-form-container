@@ -1,6 +1,6 @@
 <script>
   import { isValid, validate, validateObject } from 'valite';
-  import { definePropertyAcessors, defineReadOnlyProperty } from './object';
+  import { definePropertyAcessors, defineReadOnlyProperty, cloneOnlyKeys } from './object';
   import { isType, isEveryProperty, isNotEmptyString, isObject } from './predicates';
 
   /**
@@ -32,22 +32,27 @@
     data () {
       return {
         ticks: 0,
+        isInitialized: false,
         errors: Object.create(null),
         values: Object.create(null)
       };
     },
 
     watch: {
-      /**
-       * When schema is changed it updates values with it.
-       * @param {object} schema
-       */
       schema: {
+        /**
+         * On schema changes it update `values` state. It merges only keys in
+         * schema and outdated `values`, or `initial` if FormContainer is
+         * not initialized.
+         * @param {object} schema
+         */
+        handler (schema) {
+          const values = this.isInitialized ? this.values : this.initial;
+          if (this.isInitialized)
+            this.isInitialized = true;
+          this.values = Object.assign(cloneOnlyKeys(schema), values);
+        },
         immediate: true,
-        handler (schema = this.schema) {
-          const values = this.values || this.initial;
-          this.setupValuesWith(schema, values);
-        }
       }
     },
 
@@ -90,19 +95,6 @@
     },
 
     methods: {
-      /**
-       * Setups state using an schema and value objects.
-       * @param {object} schema
-       * @param {object} values
-       */
-      setupValuesWith (schema, values) {
-        const keys = Object.keys(Object.assign({}, schema, values));
-        this.values = keys.reduce((state, key) => {
-          state[key] = values[key] || undefined;
-          return state;
-        }, Object.create(null));
-      },
-
       /**
        * Updates a field and trigger its validation.
        * @param {string} field Field's name.

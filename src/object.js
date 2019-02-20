@@ -1,4 +1,15 @@
 /**
+ * Creates a clone of object only with keys, without values.
+ * @param {object} object
+ * @returns {object}
+ */
+export const cloneOnlyKeys = (object) => {
+  const clone = Object.create(null);
+  Object.keys(object).forEach((key) => clone[key] = undefined);
+  return clone;
+};
+
+/**
  * Defines acessors (get and set) to key on object.
  * @param {object} object
  * @param {string} key
