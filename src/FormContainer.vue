@@ -70,21 +70,6 @@
         return fields;
       },
 
-      scope () {
-        const scope = {
-          update: this.update,
-          validateForm: this.validateForm,
-          validateField: this.validateField,
-        };
-
-        defineReadOnlyProperty(scope, 'fields', () => this.fields);
-        defineReadOnlyProperty(scope, 'errors', () => this.errors);
-        defineReadOnlyProperty(scope, 'isValid', () => this.isValid);
-        defineReadOnlyProperty(scope, 'isLoading', () => this.isLoading);
-
-        return scope;
-      },
-
       isLoading () {
         return this.ticks > 0;
       },
@@ -146,7 +131,7 @@
     },
 
     render () {
-      return this.$scopedSlots.default(this.scope);
+      return this.$scopedSlots.default(this);
     }
   };
 </script>
