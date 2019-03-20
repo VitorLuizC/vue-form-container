@@ -3,6 +3,7 @@
 [![min size](https://img.shields.io/bundlephobia/min/vue-form-container.svg)](https://bundlephobia.com/result?p=vue-form-container)
 [![min + zip size](https://img.shields.io/bundlephobia/minzip/vue-form-container.svg)](https://bundlephobia.com/result?p=vue-form-container)
 [![License](https://img.shields.io/npm/l/vue-form-container.svg)](https://github.com/VitorLuizC/vue-form-container/blob/master/LICENSE)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FVitorLuizC%2Fvue-form-container.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FVitorLuizC%2Fvue-form-container?ref=badge_shield)
 
 A _Provider Component_ that encapsulate your forms and handle their states and validations. Under the hood it uses [`valite`](https://VitorLuizC/valite), a light and concise validator engine that works on asynchrony. The idea of having a component handling the states and validations of the forms I took from [`formik`](https://github.com/jaredpalmer/formik) and [`vue-final-form`](https://github.com/egoist/vue-final-form).
 
@@ -211,3 +212,6 @@ validateForm  | `() => Promise<void>`                 | Executes the validations
 ## License
 
 Released under [MIT License](./LICENSE).
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FVitorLuizC%2Fvue-form-container.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FVitorLuizC%2Fvue-form-container?ref=badge_large)
